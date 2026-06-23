@@ -23,9 +23,13 @@
     theme = "${honkai-railway-grub-theme.packages.${pkgs.system}.evernight-grub-theme}";
     splashImage = "${theme}/background.png";
   };
-
   networking.hostName = "linix-os"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  #programs.hyprland = {
+   # enable = true;
+   # xwayland.enable = false;
+  #};
+  programs.sway.enable = true;
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -33,6 +37,7 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  services.blueman.enable = true;
 
   # Set your time zone.
   time.timeZone = "Asia/Jakarta";
@@ -42,10 +47,11 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
+  services.displayManager.sddm.enable = true;
 
   # Enable the GNOME Desktop Environment.
-  services.displayManager.gdm.enable = true;
-  services.desktopManager.cosmic.enable = true;
+  services.displayManager.gdm.enable = false;
+  services.desktopManager.cosmic.enable = false;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -56,9 +62,21 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+
+  services.udisks2.enable = true;
+
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
+  services.libinput = {
+    enable = true;
+    touchpad = {
+      tapping = true;
+      naturalScrolling = true;
+      disableWhileTyping = true;
+      scrollMethod = "edge";
+    };
+  };
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -105,8 +123,25 @@
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   #  wget
     git
-    docker
-
+    lazydocker
+    #manager
+    btop
+    bemenu
+    yazi
+    micro
+    #mount services
+    udiskie
+    #clipboard
+    wl-clipboard
+    cliphist
+    #ss
+    grim
+    slurp
+    #bright
+    brightnessctl
+    pamixer
+    #notif
+    mako
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
