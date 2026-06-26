@@ -30,6 +30,9 @@
    # xwayland.enable = false;
   #};
   programs.sway.enable = true;
+  programs.steam = {
+    enable = true;
+  };
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -47,10 +50,12 @@
 
   # Enable the X11 windowing system.
   services.xserver.enable = true;
-  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.enable = false;
+  services.getty.autologinUser = null; 
 
   # Enable the GNOME Desktop Environment.
   services.displayManager.gdm.enable = false;
+  services.xserver.displayManager.lightdm.enable = false;
   services.desktopManager.cosmic.enable = false;
 
   # Configure keymap in X11
@@ -89,6 +94,7 @@
     # no need to redefine it in your config for now)
     #media-session.enable = true;
   };
+  security.polkit.enable = true;
 
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
@@ -108,6 +114,7 @@
     #  thunderbird
       netbeans
       jdk25
+      opencode
     ];
   };
 
