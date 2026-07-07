@@ -2,33 +2,35 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, inputs, honkai-railway-grub-theme, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
 
 {
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
-
-  # Bootloader.
-  # boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
-  boot.loader.timeout = 10;
-  boot.loader.grub = rec {
-    enable = true;
-    device = "nodev";
-    efiSupport = true;
-    useOSProber = true;
-    theme = "${honkai-railway-grub-theme.packages.${pkgs.system}.evernight-grub-theme}";
-    splashImage = "${theme}/background.png";
-  };
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   networking.hostName = "linix-os"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-  #programs.hyprland = {
-   # enable = true;
-   # xwayland.enable = false;
-  #};
+  imports = [
+    ./hardware-configuration.nix
+    ./bootloader/base.nix
+    ./bootloader/grub.nix
+    ./develop-tools/git.nix
+    ./develop-tools/neovim.nix
+    ./develop-tools/vscode.nix
+	./develop-tools/docker.nix
+  ];
+
+  home-manager = {
+  	useGlobalPkgs = true;
+  	useUserPackages = true;
+  	users.raj = import ./users/raj/home.nix;
+  };
   programs.sway.enable = true;
   programs.steam = {
     enable = true;
@@ -41,6 +43,7 @@
   # Enable networking
   networking.networkmanager.enable = true;
   services.blueman.enable = true;
+  hardware.bluetooth.enable = true;
 
   # Set your time zone.
   time.timeZone = "Asia/Jakarta";
@@ -51,7 +54,7 @@
   # Enable the X11 windowing system.
   services.xserver.enable = true;
   services.displayManager.sddm.enable = false;
-  services.getty.autologinUser = null; 
+  services.getty.autologinUser = null;
 
   # Enable the GNOME Desktop Environment.
   services.displayManager.gdm.enable = false;
@@ -66,8 +69,6 @@
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
-
-
   services.udisks2.enable = true;
 
   # Enable sound with pipewire.
@@ -99,37 +100,32 @@
   # Enable touchpad support (enabled default in most desktopManager).
   # services.xserver.libinput.enable = true;
 
-
-  # docker
-  virtualisation.docker.enable = true;
-  # virtualisation.docker.enableOnBoot = true;
-  # virtualisation.docker.autoPrune.enable = true;
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.raj = {
     isNormalUser = true;
     description = "raj";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "docker"
+    ];
     packages = with pkgs; [
-    #  thunderbird
+      #  thunderbird
       netbeans
       jdk25
       opencode
     ];
   };
-
-  # Install firefox.
-  programs.firefox.enable = false;
-
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-  #  wget
-    git
+  	brave
+	nixd
+	nixfmt
+  
     lazydocker
     #manager
     btop
