@@ -23,13 +23,14 @@
     ./develop-tools/git.nix
     ./develop-tools/neovim.nix
     ./develop-tools/vscode.nix
-	./develop-tools/docker.nix
+    ./develop-tools/docker.nix
+    ./packages/dependencies.nix
   ];
 
   home-manager = {
-  	useGlobalPkgs = true;
-  	useUserPackages = true;
-  	users.raj = import ./users/raj/home.nix;
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    users.raj = import ./users/raj/home.nix;
   };
   programs.sway.enable = true;
   programs.steam = {
@@ -122,10 +123,10 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-  	brave
-	nixd
-	nixfmt
-  
+    brave
+    nixd
+    nixfmt
+
     lazydocker
     #manager
     btop

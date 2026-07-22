@@ -1,5 +1,6 @@
 { ... }:
 {
+  programs.vscode.enable = true;
   programs.vscode.profiles.default.userSettings = {
     "[nix]" = {
       "editor.defaultFormatter" = "jnoortheen.nix-ide";
