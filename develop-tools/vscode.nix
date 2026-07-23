@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{ pkgs, ... }: {
   programs.vscode = {
     enable = true;
     defaultEditor = true;
@@ -20,6 +19,5 @@
       # Nix
       jnoortheen.nix-ide
     ];
-
   };
 }

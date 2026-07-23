@@ -9,4 +9,4 @@
     theme = "${honkai-railway-grub-theme.packages.${pkgs.system}.evernight-grub-theme}";
     splashImage = "${theme}/background.png";
   };
- }
+}
