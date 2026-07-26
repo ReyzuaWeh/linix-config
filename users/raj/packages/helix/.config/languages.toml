@@ -1,0 +1,18 @@
+[[language]]
+name = "nix"
+auto-format = true
+formatter = { command = "nixfmt" }
+language-servers = ["nixd"]
+
+[language-server.nixd]
+command = "nixd"
+
+[language-server.nixd.config.nixd]
+formatting.command = ["nixfmt"]
+
+
+[language-server.nixd.config.nixd.nixpkgs]
+expr = "import (builtins.getFlake \"/etc/nixos\").inputs.nixpkgs {}"
+
+[language-server.nixd.config.nixd.options]
+nixos.expr = "(builtins.getFlake \"/etc/nixos\").nixosConfigurations.linix-os.options"

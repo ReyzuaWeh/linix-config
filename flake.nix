@@ -5,8 +5,8 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     honkai-railway-grub-theme.url = "github:voidlhf/StarRailGrubThemes";
     # claude-shell.url = "path:/home/raj/Documents/flakes-claude";
-    nvf = {
-      url = "github:notashelf/nvf";
+    nixvim = {
+      url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
@@ -21,7 +21,7 @@
       nixpkgs,
       honkai-railway-grub-theme,
       home-manager,
-      nvf,
+      nixvim,
       ...
     }@inputs:
     let
@@ -34,9 +34,12 @@
         modules = [
           ./configuration.nix
           home-manager.nixosModules.home-manager
-          nvf.nixosModules.default
+          nixvim.nixosModules.nixvim
         ];
-        specialArgs = { inherit honkai-railway-grub-theme; };
+        specialArgs = {
+          inherit honkai-railway-grub-theme;
+          inherit inputs;
+        };
       };
     };
 }

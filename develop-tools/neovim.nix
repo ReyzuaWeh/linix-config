@@ -1,34 +1,70 @@
-{ ... }: {
-  programs.nvf = {
+{ pkgs, inputs, ... }: {
+  programs.nixvim = {
     enable = true;
-    settings = {
-      vim = {
-        viAlias = true;
-        vimAlias = true;
+    vimAlias = true;
+    viAlias = true;
+    opts = {
+      number = true;
+      smartindent = true;
+    };
 
-        lsp.enable = true;
-        lsp.formatOnSave = true;
-        formatter.conform-nvim.enable = true;
-        formatter.conform-nvim.presets.nixfmt.enable = true;
-
-        snippets.luasnip.enable = true;
-        snippets.luasnip.setupOpts = { };
-        autocomplete.nvim-cmp.enable = true;
-        mini.snippets.enable = true;
-        languages = {
-          python.enable = true;
-          nix = {
-            enable = true;
-          };
-          enableFormat = true;
-        };
-
-        theme = {
+    plugins = {
+      lsp = {
+        enable = true;
+        servers.nixd = {
           enable = true;
-          name = "tokyonight";
-          style = "night";
+          settings = {
+            formatting.command = [ "nixfmt" ];
+            nixpkgs = {
+              expr = "import (builtins.getFlake \"/etc/nixos/\").inputs.nixpkgs { }";
+            };
+            options = {
+              nixos.expr = "(builtins.getFlake \"/etc/nixos/\").nixosConfigurations.linix-os.options";
+            };
+          };
+          #inlayHints.enable = true;
+        };
+        servers.nil_ls = {
+          enable = false;
+          settings.nil = {
+            formatting.command = [ "nixfmt" ];
+            nix.flake = {
+              autoEvalInputs = true;
+              autoArchive = true;
+              nixpkgsInputName = "nixpkgs";
+            };
+          };
         };
       };
+      blink-cmp = {
+        enable = true;
+        settings = {
+          keymap.preset = "super-tab";
+          sources.default = [
+            "lsp"
+            "path"
+            "snippets"
+            "buffer"
+          ];
+        };
+      };
+      luasnip.enable = true;
+      conform-nvim.enable = true;
+      conform-nvim.settings = {
+        format_on_save = {
+          timeout_ms = 500;
+          lsp_fallback = true;
+        };
+        formatters_by_ft = {
+          nix = [ "nixfmt" ];
+        };
+      };
+      #nvim-snippets.enable = true;
+
+      dashboard.enable = true;
+    };
+    colorschemes.onedark = {
+      enable = true;
     };
   };
 }

@@ -1,14 +1,12 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
 {
   config,
   pkgs,
   inputs,
   ...
 }:
-
 {
   nix.settings.experimental-features = [
     "nix-command"
@@ -24,15 +22,18 @@
     ./develop-tools/neovim.nix
     ./develop-tools/vscode.nix
     ./develop-tools/docker.nix
+    #    ./develop-tools/helix.nix
     ./packages/dependencies.nix
   ];
 
   home-manager = {
     useGlobalPkgs = true;
     useUserPackages = true;
+    backupFileExtension = "backup";
     users.raj = import ./users/raj/home.nix;
   };
-  programs.sway.enable = true;
+  #programs.sway.enable = true;
+  programs.hyprland.enable = true;
   programs.steam = {
     enable = true;
   };

@@ -1,8 +1,6 @@
-{ pkgs, ... }: {
+{pkgs, ...}: {
   environment.systemPackages = with pkgs; [
     brave
-    nixd
-    nixfmt
 
     lazydocker
     #manager
