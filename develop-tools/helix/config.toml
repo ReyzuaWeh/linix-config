@@ -12,7 +12,7 @@ formatting.command = ["nixfmt"]
 
 
 [language-server.nixd.config.nixd.nixpkgs]
-expr = "import (builtins.getFlake \"/etc/nixos\" ).inputs.nixpkgs {}"
+expr = "import (builtins.getFlake \"/etc/nixos\").inputs.nixpkgs {}"
 
 [language-server.nixd.config.nixd.options]
-nixos.expr = "(builtins.getFlake \"/etc/nixos\".nixosConfigurations.linix-os.options"
+nixos.expr = "(builtins.getFlake \"/etc/nixos\").nixosConfigurations.linix-os.options"

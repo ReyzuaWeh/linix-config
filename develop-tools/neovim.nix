@@ -1,8 +1,10 @@
-{ pkgs, inputs, ... }: {
+{
+  pkgs,
+  inputs,
+  ...
+}: {
   programs.nixvim = {
-    enable = true;
-    vimAlias = true;
-    viAlias = true;
+    enable = false;
     opts = {
       number = true;
       smartindent = true;
@@ -10,11 +12,11 @@
 
     plugins = {
       lsp = {
-        enable = true;
+        enable = false;
         servers.nixd = {
           enable = true;
           settings = {
-            formatting.command = [ "nixfmt" ];
+            formatting.command = ["nixfmt"];
             nixpkgs = {
               expr = "import (builtins.getFlake \"/etc/nixos/\").inputs.nixpkgs { }";
             };
@@ -24,47 +26,33 @@
           };
           #inlayHints.enable = true;
         };
-        servers.nil_ls = {
-          enable = false;
-          settings.nil = {
-            formatting.command = [ "nixfmt" ];
-            nix.flake = {
-              autoEvalInputs = true;
-              autoArchive = true;
-              nixpkgsInputName = "nixpkgs";
-            };
-          };
-        };
+	};
       };
-      blink-cmp = {
-        enable = true;
-        settings = {
-          keymap.preset = "super-tab";
-          sources.default = [
-            "lsp"
-            "path"
-            "snippets"
-            "buffer"
-          ];
-        };
-      };
-      luasnip.enable = true;
-      conform-nvim.enable = true;
-      conform-nvim.settings = {
-        format_on_save = {
-          timeout_ms = 500;
-          lsp_fallback = true;
-        };
-        formatters_by_ft = {
-          nix = [ "nixfmt" ];
-        };
-      };
-      #nvim-snippets.enable = true;
-
-      dashboard.enable = true;
-    };
-    colorschemes.onedark = {
-      enable = true;
-    };
   };
+  programs.neovim = {
+    enable = true;
+    package = pkgs.neovim-unwrapped;
+    # configure = {
+    #   packages.myVimPackage = with pkgs.vimPlugins; {
+    #     # loaded on launch
+    #     start = [ lazydev-nvim ];
+    #     # manually loadable by calling `:packadd $plugin-name`
+    #   };
+    # };
+  };
+	#  programs.bash.initExtra = ''
+	#  	nvim(){
+	# 	stty -ixon
+	# 	command nvim "$@"
+	# 	stty ixon
+	# }
+	#  '';
+  environment.etc."xdg/nvim/init.lua".source = ./nvim/init.lua;
+  environment.systemPackages = with pkgs; [
+    nixd
+    nixfmt
+    #vimPlugins.nvim-lspconfig
+    #vimPlugins.lazydev-nvim
+    lua-language-server
+  ];
 }

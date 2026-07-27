@@ -7,6 +7,9 @@
   ];
   xdg.enable = true;
 
-  xdg.configFile."helix/languages.toml".enable = true;
-  xdg.configFile."helix/languages.toml".source = ./.config/languages.toml;
+  xdg.configFile = {
+    "helix/languages.toml".enable = true;
+    "helix/languages.toml".source = ./.config/languages.toml;
+    "helix/config.toml".source = ./.config/config.toml;
+  };
 }

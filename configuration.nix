@@ -2,9 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 {
-  config,
   pkgs,
-  inputs,
   ...
 }:
 {
@@ -22,7 +20,7 @@
     ./develop-tools/neovim.nix
     ./develop-tools/vscode.nix
     ./develop-tools/docker.nix
-    #    ./develop-tools/helix.nix
+    #./develop-tools/helix.nix
     ./packages/dependencies.nix
   ];
 
@@ -34,6 +32,7 @@
   };
   #programs.sway.enable = true;
   programs.hyprland.enable = true;
+  programs.foot.enable = true;
   programs.steam = {
     enable = true;
   };
