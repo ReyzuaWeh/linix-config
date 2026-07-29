@@ -1,6 +1,11 @@
 { pkgs, ... }: {
+  fonts.packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.symbols-only
+  ];
   environment.systemPackages = with pkgs; [
     brave
+    xwayland-satellite
 
     lazydocker
     #manager

@@ -33,6 +33,12 @@
   #programs.sway.enable = true;
   programs.hyprland.enable = true;
   programs.foot.enable = true;
+  programs.xwayland.enable = true;
+  programs.foot.settings = {
+    main = {
+      font = "JetBrainsMono Nerd Font:size=10,Symbols Nerd Font Mono:size=10";
+    };
+  };
   programs.steam = {
     enable = true;
   };
