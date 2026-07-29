@@ -21,6 +21,9 @@
           nvim-web-devicons
           lazygit-nvim
           toggleterm-nvim
+          multicursor-nvim
+          nvim-lsp-file-operations
+          inc-rename-nvim
         ];
         # manually loadable by calling `:packadd $plugin-name`
       };
