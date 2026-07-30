@@ -37,9 +37,8 @@
   environment.systemPackages = with pkgs; [
     nixd
     nixfmt
-    #vimPlugins.nvim-lspconfig
-    #vimPlugins.lazydev-nvim
     lua-language-server
     lazygit
+    ripgrep
   ];
 }

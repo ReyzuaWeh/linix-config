@@ -1,8 +1,4 @@
-require("nvim-treesitter.configs").setup({
-	highlight = {
-		enable = true,
-	},
-})
+require("nvim-treesitter").setup()
 vim.opt.autoindent = true
 vim.opt.smartindent = true
 vim.opt.breakindent = true
