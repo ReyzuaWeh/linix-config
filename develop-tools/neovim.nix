@@ -9,6 +9,7 @@
     configure = {
       customLuaRC = ''
         	${builtins.readFile ./nvim/init.lua}
+        	${builtins.readFile ./nvim/treesitter.lua}
         	'';
       packages.myVimPackage = with pkgs.vimPlugins; {
         # loaded on launch
@@ -24,6 +25,9 @@
           multicursor-nvim
           nvim-lsp-file-operations
           inc-rename-nvim
+          nvim-treesitter
+          telescope-nvim
+          nvim-autopairs
         ];
         # manually loadable by calling `:packadd $plugin-name`
       };

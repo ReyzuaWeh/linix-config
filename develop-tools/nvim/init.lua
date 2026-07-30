@@ -38,6 +38,8 @@ vim.lsp.config["nixd"] = {
 	}
 }
 vim.opt.completeopt = { 'menu', 'menuone', 'noinsert' }
+-- vim.opt.autoindent = true
+-- vim.opt.smartindent = true
 vim.lsp.enable('nixd')
 vim.api.nvim_create_autocmd('LspAttach', {
 	callback = function(args)
@@ -98,7 +100,7 @@ vim.keymap.set({ "i", "n" }, "<F2>", vim.lsp.buf.rename)
 vim.keymap.set({ "n", "x" }, "<C-d>", function()
 	ms.matchAddCursor(1)
 end)
-vim.keymap.set("v", "I", ms.insertVisual)
+vim.keymap.set("x", "<C-i>", ms.insertVisual)
 
 vim.keymap.set("v", "<BS>", function()
 	vim.cmd('normal! "_d')
