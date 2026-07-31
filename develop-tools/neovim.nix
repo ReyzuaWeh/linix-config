@@ -7,13 +7,13 @@
     enable = true;
     package = pkgs.neovim-unwrapped;
     configure = {
-           customLuaRC = ''
-package.path = package.path
-  .. ";${./nvim}/config/?.lua"
-  .. ";${./nvim}/config/?/?.lua"
+      customLuaRC = ''
+        package.path = package.path
+          .. ";${./nvim}/config/?.lua"
+          .. ";${./nvim}/config/?/?.lua"
 
-${builtins.readFile ./nvim/init.lua}
-''; 
+        ${builtins.readFile ./nvim/init.lua}
+      '';
       packages.myVimPackage = with pkgs.vimPlugins; {
         # loaded on launch
         start = [
