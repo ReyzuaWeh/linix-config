@@ -7,10 +7,13 @@
     enable = true;
     package = pkgs.neovim-unwrapped;
     configure = {
-      customLuaRC = ''
-        	${builtins.readFile ./nvim/init.lua}
-        	${builtins.readFile ./nvim/treesitter.lua}
-        	'';
+           customLuaRC = ''
+package.path = package.path
+  .. ";${./nvim}/config/?.lua"
+  .. ";${./nvim}/config/?/?.lua"
+
+${builtins.readFile ./nvim/init.lua}
+''; 
       packages.myVimPackage = with pkgs.vimPlugins; {
         # loaded on launch
         start = [
@@ -28,17 +31,31 @@
           nvim-treesitter
           telescope-nvim
           nvim-autopairs
+
+          copilot-lua
+          CopilotChat-nvim
+          codecompanion-nvim
         ];
-        # manually loadable by calling `:packadd $plugin-name`
       };
     };
   };
-  # environment.etc."xdg/nvim/init.lua".source = ./nvim/init.lua;
+  programs.lazygit = {
+    enable = true;
+    settings = ''
+      customCommands :
+      - key : "C"
+        command : "oco --commit"
+        context : "files"
+    '';
+  };
   environment.systemPackages = with pkgs; [
     nixd
     nixfmt
     lua-language-server
-    lazygit
+    nodejs
+
     ripgrep
+
+    opencommit
   ];
 }
