@@ -20,8 +20,8 @@
     ./develop-tools/neovim.nix
     ./develop-tools/vscode.nix
     ./develop-tools/docker.nix
-    #./develop-tools/helix.nix
     ./packages/dependencies.nix
+    ./desktop/niri.nix
   ];
 
   home-manager = {
@@ -30,9 +30,6 @@
     backupFileExtension = "backup";
     users.raj = import ./users/raj/home.nix;
   };
-  #programs.sway.enable = true;
-  programs.hyprland.enable = true;
-  programs.foot.enable = true;
   programs.xwayland.enable = true;
   programs.foot.settings = {
     main = {
