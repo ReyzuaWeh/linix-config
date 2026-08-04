@@ -10,6 +10,8 @@
     "nix-command"
     "flakes"
   ];
+  xdg.portal.enable = true;
+  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   networking.hostName = "linix-os"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   imports = [
@@ -30,7 +32,6 @@
     backupFileExtension = "backup";
     users.raj = import ./users/raj/home.nix;
   };
-  programs.xwayland.enable = true;
   programs.foot.settings = {
     main = {
       font = "JetBrainsMono Nerd Font:size=10,Symbols Nerd Font Mono:size=10";
@@ -122,34 +123,6 @@
   };
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    brave
-    nixd
-    nixfmt
-
-    lazydocker
-    #manager
-    btop
-    bemenu
-    yazi
-    micro
-    #mount services
-    udiskie
-    #clipboard
-    wl-clipboard
-    cliphist
-    #ss
-    grim
-    slurp
-    #bright
-    brightnessctl
-    pamixer
-    #notif
-    mako
-  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

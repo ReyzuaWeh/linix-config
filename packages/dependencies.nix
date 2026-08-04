@@ -6,21 +6,21 @@
   environment.systemPackages = with pkgs; [
     brave
     xwayland-satellite
-
     lazydocker
+    fuzzel
     #manager
     btop
     bemenu
     yazi
     micro
     #mount services
-    udiskie
+    # udiskie
     #clipboard
     wl-clipboard
     cliphist
     #ss
-    grim
-    slurp
+    # grim
+    # slurp
     #bright
     brightnessctl
     pamixer
