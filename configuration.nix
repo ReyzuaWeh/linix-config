@@ -22,6 +22,7 @@
     ./develop-tools/neovim.nix
     ./develop-tools/vscode.nix
     ./develop-tools/docker.nix
+    ./develop-tools/devops/nomad.nix
     ./packages/dependencies.nix
     ./desktop/niri.nix
   ];

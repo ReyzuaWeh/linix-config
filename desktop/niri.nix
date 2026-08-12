@@ -5,4 +5,5 @@
   programs.foot.enable = true;
   programs.waybar.enable = true;
   services.gvfs.enable = true;
+  environment.etc."niri/config.kdl".source = ./niri/config.kdl;
 }

@@ -4,7 +4,9 @@
     nerd-fonts.symbols-only
   ];
   environment.systemPackages = with pkgs; [
+    microsoft-edge
     brave
+
     xwayland-satellite
     lazydocker
     fuzzel
