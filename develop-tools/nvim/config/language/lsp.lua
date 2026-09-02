@@ -46,6 +46,11 @@ vim.lsp.config["lua_ls"] = {
         }
     }
 }
+vim.lsp.config("bashls", {
+    cmd = { "bash-language-server", "start" },
+    filetypes = { "sh", "bash" },
+})
 
 vim.lsp.enable('nixd')
 vim.lsp.enable("lua_ls")
+vim.lsp.enable("bashls")
