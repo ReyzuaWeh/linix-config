@@ -6,6 +6,11 @@
   environment.systemPackages = with pkgs; [
     microsoft-edge
     brave
+    teams-for-linux
+
+    openssl
+    openssl.dev
+    pkg-config
 
     xwayland-satellite
     lazydocker

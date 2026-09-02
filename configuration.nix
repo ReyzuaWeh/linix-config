@@ -13,6 +13,11 @@
   xdg.portal.enable = true;
   xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
   networking.hostName = "linix-os"; # Define your hostname.
+  networking.hosts = {
+    "127.0.0.1" = [ "app.local" ];
+  };
+  networking.firewall.allowedTCPPorts = [ 5002 ];
+  networking.firewall.trustedInterfaces = [ "docker0" ];
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
   imports = [
     ./hardware-configuration.nix
@@ -22,7 +27,7 @@
     ./develop-tools/neovim.nix
     ./develop-tools/vscode.nix
     ./develop-tools/docker.nix
-    ./develop-tools/devops/nomad.nix
+    # ./develop-tools/devops/nomad.nix
     ./packages/dependencies.nix
     ./desktop/niri.nix
   ];

@@ -3,6 +3,8 @@
     enable = true;
     defaultEditor = true;
     extensions = with pkgs.vscode-extensions; [
+      # vue
+      vue.volar
       # Python & Java
       ms-python.python
       ms-python.vscode-pylance
