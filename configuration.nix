@@ -11,10 +11,22 @@
     "flakes"
   ];
   xdg.portal.enable = true;
-  xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+
+  xdg.portal.extraPortals = [
+    pkgs.xdg-desktop-portal-gtk
+  ];
+
+  xdg.portal.config.niri = {
+    "org.freedesktop.impl.portal.FileChooser" = [ "gtk" ];
+  }; # xdg.portal.config.common."org.freedesktop.impl.portal.ScreenCast" = "wlr";
+  xdg.portal.config.common.default = "gtk";
   networking.hostName = "linix-os"; # Define your hostname.
   networking.hosts = {
     "127.0.0.1" = [ "app.local" ];
+  };
+  environment.sessionVariables = {
+    XDG_CURRENT_DESKTOP = "niri";
+    XDG_SESSION_TYPE = "wayland";
   };
   networking.firewall.allowedTCPPorts = [ 5002 ];
   networking.firewall.trustedInterfaces = [ "docker0" ];
@@ -46,6 +58,8 @@
   programs.steam = {
     enable = true;
   };
+  programs.bash.enable = true;
+  programs.bash.interactiveShellInit = "export PROMPT_DIRTRIM=1";
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -55,6 +69,12 @@
   networking.networkmanager.enable = true;
   services.blueman.enable = true;
   hardware.bluetooth.enable = true;
+  hardware.bluetooth.powerOnBoot = true;
+  hardware.bluetooth.settings = {
+    General = {
+      Enable = "Source,Sink,Media,Socket";
+    };
+  };
 
   # Set your time zone.
   time.timeZone = "Asia/Jakarta";

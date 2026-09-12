@@ -11,6 +11,9 @@
     openssl
     openssl.dev
     pkg-config
+    discord
+
+    libreoffice
 
     xwayland-satellite
     lazydocker

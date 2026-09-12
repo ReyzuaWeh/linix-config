@@ -53,6 +53,7 @@
     nixfmt
     lua-language-server
     nodejs
+    yarn
     bash-language-server
 
     ripgrep
